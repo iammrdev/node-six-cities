@@ -1,7 +1,7 @@
 # Личный проект «Шесть городов (простой)»
 
-* Студент: [Vitalii Iashchuk](https://up.htmlacademy.ru/nodejs-api/2/user/93555).
-* Наставник: `Неизвестно`.
+- Студент: [Vitalii Iashchuk](https://up.htmlacademy.ru/nodejs-api/2/user/93555).
+- Наставник: [Владислав Поклонский](https://up.htmlacademy.ru/nodejs-api/2/user/2210683).
 
 ---
 
