@@ -1,0 +1,70 @@
+{
+  "api": {
+    "names": [
+      "Bedroom 1",
+      "Bedroom 2",
+      "Bedroom 3",
+      "House 1",
+      "House 2"
+    ],
+    "descriptions": [
+      "Aute reprehenderit incididunt nostrud minim occaecat aliqua culpa magna in eiusmod cupidatat ex",
+      "In consequat laborum aliquip non elit deserunt laboris laborum",
+      "Aliqua elit laboris irure adipisicing cupidata",
+      "Elit nisi et ullamco ea aute ex nisi exercitation irure amet",
+      "Incididunt exercitation non proident incididunt eu nisi ullamco ad reprehenderit ad"
+    ],
+    "cities": [
+      "Paris",
+      "Cologne",
+      "Brussels",
+      "Amsterdam",
+      "Hamburg",
+      "Dusseldorf"
+    ],
+    "previews": [
+      "preview-01.jpg",
+      "preview-02.jpg",
+      "preview-03.jpg",
+      "preview-04.jpg",
+      "preview-05.jpg"
+    ],
+    "photos": [
+      "photo-01.jpg",
+      "photo-02.jpg",
+      "photo-03.jpg",
+      "photo-04.jpg",
+      "photo-05.jpg"
+    ],
+    "types": [
+      "apartment",
+      "house",
+      "room",
+      "hotel"
+    ],
+    "features": [
+      "Breakfast",
+      "Air conditioning",
+      "Laptop friendly workspace",
+      "Baby seat",
+      "Washer",
+      "Towels",
+      "Fridge"
+    ],
+    "authors": [
+      "63276e430a2392cab83390c7",
+      "63276e43624c9c57a41c7b71",
+      "63276e4323849814ede1e155",
+      "63276e43da9672d516f05c32",
+      "63276e437f90bf520cf700d6"
+    ],
+    "coordinates": [
+      "55.529773;-58.455369",
+      "38.165938;-160.46319",
+      "51.810329;-25.004731",
+      "-61.953943;45.499739",
+      "22.67755;94.886081",
+      "59.12881;5.306484"
+    ]
+  }
+}

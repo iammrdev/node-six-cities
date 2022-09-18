@@ -1,4 +1,4 @@
-export interface FileReaderInterface {
+export interface TSVFileReaderInterface {
   readonly filename: string;
   read(): void;
 }
