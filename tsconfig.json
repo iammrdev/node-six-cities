@@ -29,7 +29,7 @@
   },
   "include": [
     "src/**/*.ts"
-, "src/common/file-reader/file-reader.interface.ts"  ],
+  ],
   "exclude": [
     "node_modules",
     "**/*.test.ts"
