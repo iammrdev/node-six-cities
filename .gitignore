@@ -10,3 +10,4 @@
 coverage
 *.log
 /notes
+*.env
