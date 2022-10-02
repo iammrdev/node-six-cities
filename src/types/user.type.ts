@@ -1,10 +1,11 @@
 export type UserId = string;
 
+export type UserType = 'base' | 'pro'
+
 export type User = {
-  id: UserId;
+  id?: UserId;
   name: string;
   email: string;
   avatar: string;
-  password: string;
-  type: 'base' | 'pro';
+  type: UserType;
 }

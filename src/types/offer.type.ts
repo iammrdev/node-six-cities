@@ -1,5 +1,5 @@
 import { City } from './city.enum.js';
-import { UserId } from './user.type.js';
+import { User } from './user.type.js';
 
 export enum OfferType {
   Apartment = 'apartment',
@@ -8,6 +8,7 @@ export enum OfferType {
   Hotel = 'hotel',
 }
 export type OfferFeature = 'Breakfast' | 'Air conditioning' | 'Laptop friendly workspace' | 'Baby seat' | 'Washer' | 'Towels' | 'Fridge';
+
 export type Coordinates = [number, number];
 
 export type Offer = {
@@ -24,7 +25,7 @@ export type Offer = {
   guests: number;
   price: number;
   features: OfferFeature[];
-  author: UserId;
+  author: User;
   comments: number;
   coordinates: Coordinates;
 };

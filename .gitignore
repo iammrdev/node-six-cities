@@ -11,3 +11,5 @@ coverage
 *.log
 /notes
 *.env
+/mongodb/
+/upload/

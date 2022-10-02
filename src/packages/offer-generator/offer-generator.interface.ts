@@ -10,6 +10,8 @@ export type OfferGeneratorData = {
   photos: string[],
   types: string[],
   features: string[],
-  authors: string[],
   coordinates: string[],
+  emails: string[];
+  users: string[];
+  avatars: string[]
 };

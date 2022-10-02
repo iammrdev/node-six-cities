@@ -1,11 +1,11 @@
 {
   "api": {
     "names": [
-      "Bedroom 1",
-      "Bedroom 2",
-      "Bedroom 3",
-      "House 1",
-      "House 2"
+      "Luxury Bedroom 1",
+      "Luxury Bedroom 2",
+      "Luxury Bedroom 3",
+      "Perfect TownHouse 1",
+      "Perfect TownHouse 2"
     ],
     "descriptions": [
       "Aute reprehenderit incididunt nostrud minim occaecat aliqua culpa magna in eiusmod cupidatat ex",
@@ -51,13 +51,6 @@
       "Towels",
       "Fridge"
     ],
-    "authors": [
-      "63276e430a2392cab83390c7",
-      "63276e43624c9c57a41c7b71",
-      "63276e4323849814ede1e155",
-      "63276e43da9672d516f05c32",
-      "63276e437f90bf520cf700d6"
-    ],
     "coordinates": [
       "55.529773;-58.455369",
       "38.165938;-160.46319",
@@ -65,6 +58,37 @@
       "-61.953943;45.499739",
       "22.67755;94.886081",
       "59.12881;5.306484"
+    ],
+    "users": [
+      "Иван Иванов",
+      "Олег Сидоров",
+      "Пьер Безухов",
+      "Роланд Дискейн",
+      "Холи Гибни",
+      "Джек Торренс",
+      "Антон Городецкий",
+      "Борис Гесер",
+      "Рокки Бальбоа",
+      "Джон Смит"
+    ],
+    "emails": [
+      "snow@pisem.local",
+      "president@dka.local",
+      "fish@big.local",
+      "test@pisem.local",
+      "freedom@pisem.local",
+      "rolan@pochta.local",
+      "author@mir.local",
+      "test@lost.loca",
+      "kujo-fan@story.local"
+    ],
+    "avatars": [
+      "user.jpg",
+      "photo.jpg",
+      "awesome-avatar.jpg",
+      "roland.jpg",
+      "smit.jpg",
+      "coffee.jpg"
     ]
   }
 }
