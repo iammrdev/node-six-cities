@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 import { inject, injectable } from 'inversify';
-import { Component } from '../../config/config.component';
+import { Component } from '../../config/config.component.js';
 import { LoggerInterface } from '../logger/logger.interface.js';
 import { DatabaseInterface } from './database.interface.js';
 

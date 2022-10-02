@@ -22,9 +22,12 @@ export class OfferGenerator implements OfferGeneratorInterface {
     const guests = Randomizer.generateRandomValue(1, 10);
     const price = Randomizer.generateRandomValue(100, 100000);
     const features = Randomizer.getRandomItems(this.mockData.features);
-    const author = Randomizer.getRandomItem(this.mockData.authors);
     const comments = Randomizer.generateRandomValue(0, 100);
     const coordinates = Randomizer.getRandomItem(this.mockData.coordinates);
+    const user = Randomizer.getRandomItem(this.mockData.users);
+    const email = Randomizer.getRandomItem(this.mockData.emails);
+    const avatar = Randomizer.getRandomItem(this.mockData.avatars);
+
 
     return [
       name,
@@ -40,9 +43,11 @@ export class OfferGenerator implements OfferGeneratorInterface {
       guests,
       price,
       features,
-      author,
+      user,
       comments,
       coordinates,
+      email,
+      avatar
     ].join('\t');
   }
 
@@ -63,9 +68,11 @@ export class OfferGenerator implements OfferGeneratorInterface {
       guests,
       price,
       features,
-      author,
+      user,
       comments,
       coordinates,
+      email,
+      avatar
     ] = tokens;
 
     return {
@@ -82,7 +89,12 @@ export class OfferGenerator implements OfferGeneratorInterface {
       guests: Number(guests),
       price: Number(price),
       features: features.split(';') as OfferFeature[],
-      author,
+      author: {
+        email,
+        avatar,
+        name: user,
+        type: Randomizer.getRandomItem(['base', 'pro'])
+      },
       comments: Number(comments),
       coordinates: coordinates.split(';').map(Number) as Coordinates,
     };

@@ -13,7 +13,7 @@ export default class UserService implements UserServiceInterface {
     @inject(Component.UserModel) private readonly userModel: types.ModelType<UserEntity>
   ) { }
 
-  async create(dto: CreateUserDto, salt: string): Promise<DocumentType<UserEntity>> {
+  public async create(dto: CreateUserDto, salt: string): Promise<DocumentType<UserEntity>> {
     const user = new UserEntity(dto);
     user.setPassword(dto.password, salt);
 
@@ -23,11 +23,11 @@ export default class UserService implements UserServiceInterface {
     return result;
   }
 
-  async findByEmail(email: string): Promise<DocumentType<UserEntity> | null> {
+  public async findByEmail(email: string): Promise<DocumentType<UserEntity> | null> {
     return this.userModel.findOne({ email });
   }
 
-  async findOrCreate(dto: CreateUserDto, salt: string): Promise<DocumentType<UserEntity>> {
+  public async findOrCreate(dto: CreateUserDto, salt: string): Promise<DocumentType<UserEntity>> {
     const existedUser = await this.findByEmail(dto.email);
 
     if (existedUser) {
