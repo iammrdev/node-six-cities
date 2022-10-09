@@ -1,0 +1,237 @@
+openapi: 3.0.3
+info:
+  title: API сервер для проекта «Шесть городов».
+  description: |-
+    * Список ресурсов и маршрутов сервера «Шесть городов».
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+  version: 2.0.0
+tags:
+  - name: offers
+    description: Действия с предложениями.
+  - name: comments
+    description: Действия с комментариями.
+  - name: users
+    description: Действия с пользователем.
+
+
+paths:
+  /offers:
+    get:
+      tags:
+        - offers
+      summary: Получение списка предложений.
+      description: Получение списка предложений.
+      responses:
+        "200":
+          description: Выполнено успешно.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/offer"
+    post:
+      tags:
+        - offers
+      summary: Создание нового предложения.
+      description: Создание нового предложения.
+      requestBody:
+        description: Параметры запроса
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/createOffer"
+        required: true
+      responses:
+        "201":
+          description: Предложение создано.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/offer"
+  /comments/{offerId}:
+    get:
+      tags:
+        - comments
+      summary: Получиение списка комментариев.
+      description: Получиение списка комментариев
+      responses:
+        "200":
+          description: Выполнено успешно.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/comment"
+    post:
+      tags:
+        - comments
+      summary: Создание комментария.
+      description: Создание комментария.
+      requestBody:
+        description: Параметры запроса.
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/createComment"
+        required: true
+      responses:
+        "200":
+          description: Выполнено успешно.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/comment"
+  /offers/{offerId}:
+    get:
+      tags:
+        - offers
+      summary: Получение предложения.
+      description: Получение предложения.
+      responses:
+        "200":
+          description: Выполнено успешно.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/offer"
+    put:
+      tags:
+        - offers
+      summary: Редактирование предложения.
+      description: Редактирование предложения.
+      requestBody:
+        description: Параметры запроса
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/offer"
+        required: true
+      responses:
+        "200":
+          description: Выполнено успешно.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/offer"
+    delete:
+      tags:
+        - offers
+      summary: Удаление предложения.
+      description: Удаление предложения.
+      responses:
+        "204":
+          description: Предложение удалено.
+  /users/register:
+    post:
+      tags:
+        - users
+      summary: Регистрация пользователя
+      description: Регистрирует нового пользователя.
+      requestBody:
+        description: Информация для создания нового пользователя.
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/createUser"
+        required: true
+
+      responses:
+        "201":
+          description: Пользователь зарегистрирован. Объект пользователя.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/user"
+
+        "409":
+          description: Пользователь с таким email уже существует.
+  /users/login:
+    get:
+      tags:
+        - users
+      summary: Проверка авторизации пользователя
+      description: Возвращает информацию о пользователе
+      parameters:
+        - in: header
+          name: Authorization
+          schema:
+            type: string
+          example: "Bearer T2xpdmVyLmNvbm5lckBnbWFpbC5jb20="
+          required: true
+      responses:
+        "200":
+          description: Выполнено успешно.
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#"
+    post:
+      tags:
+        - users
+      summary: Авторизация пользователя
+      description: Авторизует пользователя на основе логина и пароля
+      requestBody:
+        description: Параметры запроса.
+        content:
+          application/json:
+            schema:
+              $ref: "#"
+      responses:
+        "200":
+          description: Выполнено успешно.
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#"
+
+components:
+  schemas:
+    createUser:
+      type: object
+
+      properties:
+        email:
+          type: string
+          example: keks@htmlacademy.ru
+
+        firstname:
+          type: string
+          example: Keks
+
+        lastname:
+          type: string
+          example: Cat
+
+        password:
+          type: string
+          example: 123456
+
+    user:
+      type: object
+
+      properties:
+        id:
+          type: string
+          example: 6329c3d6a04ab1061c6425ea
+
+        email:
+          type: string
+          example: keks@htmlacademy.ru
+
+    createOffer:
+      type: object
+
+    offer:
+      type: object
+
+    createComment:
+      type: object
+
+    comment:
+      type: object

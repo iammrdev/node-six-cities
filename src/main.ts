@@ -1,5 +1,5 @@
 import 'reflect-metadata';
-import { Container } from 'inversify';
+import { Container as DependencyContainer } from 'inversify';
 import { types } from '@typegoose/typegoose';
 import { LoggerInterface } from './packages/logger/logger.interface.js';
 import LoggerService from './packages/logger/logger.service.js';
@@ -16,15 +16,21 @@ import { OfferServiceInterface } from './modules/offer/offer-service.interface.j
 import OfferService from './modules/offer/offer.service.js';
 import { OfferEntity, OfferModel } from './modules/offer/offer.entity.js';
 
-const applicationContainer = new Container();
-applicationContainer.bind<Application>(Component.Application).to(Application).inSingletonScope();
-applicationContainer.bind<LoggerInterface>(Component.LoggerInterface).to(LoggerService).inSingletonScope();
-applicationContainer.bind<ConfigInterface>(Component.ConfigInterface).to(ConfigService).inSingletonScope();
-applicationContainer.bind<DatabaseInterface>(Component.DatabaseInterface).to(DatabaseService).inSingletonScope();
-applicationContainer.bind<UserServiceInterface>(Component.UserServiceInterface).to(UserService);
-applicationContainer.bind<types.ModelType<UserEntity>>(Component.UserModel).toConstantValue(UserModel);
-applicationContainer.bind<OfferServiceInterface>(Component.OfferServiceInterface).to(OfferService);
-applicationContainer.bind<types.ModelType<OfferEntity>>(Component.OfferModel).toConstantValue(OfferModel);
+const dependencyContainer = new DependencyContainer();
+// singleton
+dependencyContainer.bind<Application>(Component.Application).to(Application).inSingletonScope();
+dependencyContainer.bind<LoggerInterface>(Component.LoggerInterface).to(LoggerService).inSingletonScope();
+dependencyContainer.bind<ConfigInterface>(Component.ConfigInterface).to(ConfigService).inSingletonScope();
+dependencyContainer.bind<DatabaseInterface>(Component.DatabaseInterface).to(DatabaseService).inSingletonScope();
 
-const application = applicationContainer.get<Application>(Component.Application);
+// interfaces
+dependencyContainer.bind<UserServiceInterface>(Component.UserServiceInterface).to(UserService);
+dependencyContainer.bind<OfferServiceInterface>(Component.OfferServiceInterface).to(OfferService);
+
+// models
+dependencyContainer.bind<types.ModelType<UserEntity>>(Component.UserModel).toConstantValue(UserModel);
+dependencyContainer.bind<types.ModelType<OfferEntity>>(Component.OfferModel).toConstantValue(OfferModel);
+
+const application = dependencyContainer.get<Application>(Component.Application);
+
 await application.init();
