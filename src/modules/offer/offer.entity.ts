@@ -61,7 +61,7 @@ export class OfferEntity extends defaultClasses.TimeStamps {
   public features!: OfferFeature[];
 
   @prop({ ref: UserEntity, required: true })
-  public author!: Ref<UserEntity>;
+  public userId!: Ref<UserEntity>;
 
   @prop({ default: 0 })
   public comments!: number;
