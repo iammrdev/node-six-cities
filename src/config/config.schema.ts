@@ -36,13 +36,13 @@ export const configSchema = convict<ConfigSchema>({
     doc: 'Username to connect to the database (MongoDB)',
     format: String,
     env: 'DB_USER',
-    default: null,
+    default: '',
   },
   DB_PASSWORD: {
     doc: 'Database connection password (MongoDB)',
     format: String,
     env: 'DB_PASSWORD',
-    default: null,
+    default: '',
   },
   DB_PORT: {
     doc: 'Port to connect to the database (MongoDB)',
@@ -54,6 +54,6 @@ export const configSchema = convict<ConfigSchema>({
     doc: 'Database name (MongoDB)',
     format: String,
     env: 'DB_NAME',
-    default: 'course-nodejs-restapi'
+    default: 'dev'
   }
 });

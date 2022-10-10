@@ -89,7 +89,7 @@ export class OfferGenerator implements OfferGeneratorInterface {
       guests: Number(guests),
       price: Number(price),
       features: features.split(';') as OfferFeature[],
-      author: {
+      user: {
         email,
         avatar,
         name: user,
