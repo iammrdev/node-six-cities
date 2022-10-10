@@ -1,5 +1,5 @@
 import chalk from 'chalk';
-import { OfferServiceInterface } from '../modules/offer/offer-service.interface.js';
+import { OfferServiceInterface } from '../modules/offer/offer.interface.js';
 import { OfferModel } from '../modules/offer/offer.entity.js';
 import OfferService from '../modules/offer/offer.service.js';
 import { UserModel } from '../modules/user/user.entity.js';
@@ -37,13 +37,13 @@ export default class ImportCommand implements CliCommandInterface {
 
   private async saveOffer(offer: Offer) {
     const user = await this.userService.findOrCreate({
-      ...offer.author,
+      ...offer.user,
       password: 'test'
     }, this.salt);
 
     await this.offerService.create({
       ...offer,
-      author: user.id
+      userId: user.id
     });
   }
 
@@ -61,9 +61,9 @@ export default class ImportCommand implements CliCommandInterface {
     this.databaseService.disconnect();
   }
 
-  public async execute(filename: string, login: string, password: string, host: string, port: string, dbname: string, salt: string): Promise<void> {
+  public async execute(filename: string, host: string, port: string, dbname: string, salt: string, login: string, password: string,): Promise<void> {
     console.log({ login, password, host, port, dbname });
-    const uri = getURI(login, password, host, Number(port), dbname);
+    const uri = getURI(host, Number(port), dbname, login, password,);
     this.salt = salt;
 
     await this.databaseService.connect(uri);

@@ -12,9 +12,12 @@ import { DatabaseInterface } from './packages/database/database.interface.js';
 import { UserServiceInterface } from './modules/user/user.interface.js';
 import UserService from './modules/user/user.service.js';
 import { UserEntity, UserModel } from './modules/user/user.entity.js';
-import { OfferServiceInterface } from './modules/offer/offer-service.interface.js';
+import { OfferServiceInterface } from './modules/offer/offer.interface.js';
 import OfferService from './modules/offer/offer.service.js';
 import { OfferEntity, OfferModel } from './modules/offer/offer.entity.js';
+import { CommentServiceInterface } from './modules/comment/comment.interface.js';
+import CommentService from './modules/comment/comment.service.js';
+import { CommentEntity, CommentModel } from './modules/comment/comment.entity.js';
 
 const dependencyContainer = new DependencyContainer();
 // singleton
@@ -26,10 +29,12 @@ dependencyContainer.bind<DatabaseInterface>(Component.DatabaseInterface).to(Data
 // interfaces
 dependencyContainer.bind<UserServiceInterface>(Component.UserServiceInterface).to(UserService);
 dependencyContainer.bind<OfferServiceInterface>(Component.OfferServiceInterface).to(OfferService);
+dependencyContainer.bind<CommentServiceInterface>(Component.CommentServiceInterface).to(CommentService);
 
 // models
 dependencyContainer.bind<types.ModelType<UserEntity>>(Component.UserModel).toConstantValue(UserModel);
 dependencyContainer.bind<types.ModelType<OfferEntity>>(Component.OfferModel).toConstantValue(OfferModel);
+dependencyContainer.bind<types.ModelType<CommentEntity>>(Component.CommentModel).toConstantValue(CommentModel);
 
 const application = dependencyContainer.get<Application>(Component.Application);
 
