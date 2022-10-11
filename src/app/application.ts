@@ -1,5 +1,7 @@
 import 'reflect-metadata';
 import { inject, injectable } from 'inversify';
+import express, { Express } from 'express';
+
 import { LoggerInterface } from '../packages/logger/logger.interface.js';
 import { ConfigInterface } from '../config/config.interface.js';
 import { Component } from '../config/config.component.js';
@@ -8,10 +10,15 @@ import { getURI } from '../packages/database/utils.js';
 
 @injectable()
 export default class Application {
+  private server: Express;
+
   constructor(
     @inject(Component.LoggerInterface) private logger: LoggerInterface,
     @inject(Component.ConfigInterface) private config: ConfigInterface,
-    @inject(Component.DatabaseInterface) private databaseClient: DatabaseInterface) { }
+    @inject(Component.DatabaseInterface) private databaseClient: DatabaseInterface) {
+
+    this.server = express();
+  }
 
   public async init() {
     this.logger.info('Application initialization…');
@@ -26,5 +33,8 @@ export default class Application {
     );
 
     await this.databaseClient.connect(uri);
+
+    this.server.listen(this.config.get('PORT'));
+    this.logger.info(`Server started on http://localhost:${this.config.get('PORT')}`);
   }
 }
