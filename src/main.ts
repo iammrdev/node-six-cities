@@ -18,6 +18,8 @@ import { OfferEntity, OfferModel } from './modules/offer/offer.entity.js';
 import { CommentServiceInterface } from './modules/comment/comment.interface.js';
 import CommentService from './modules/comment/comment.service.js';
 import { CommentEntity, CommentModel } from './modules/comment/comment.entity.js';
+import UserController from './modules/user/user.contoller.js';
+import { ControllerInterface } from './controller/controller.interface.js';
 
 const dependencyContainer = new DependencyContainer();
 // singleton
@@ -35,6 +37,9 @@ dependencyContainer.bind<CommentServiceInterface>(Component.CommentServiceInterf
 dependencyContainer.bind<types.ModelType<UserEntity>>(Component.UserModel).toConstantValue(UserModel);
 dependencyContainer.bind<types.ModelType<OfferEntity>>(Component.OfferModel).toConstantValue(OfferModel);
 dependencyContainer.bind<types.ModelType<CommentEntity>>(Component.CommentModel).toConstantValue(CommentModel);
+
+// controllers
+dependencyContainer.bind<ControllerInterface>(Component.UserController).to(UserController).inSingletonScope();
 
 const application = dependencyContainer.get<Application>(Component.Application);
 
