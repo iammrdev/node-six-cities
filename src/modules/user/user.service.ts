@@ -3,7 +3,7 @@ import { DocumentType, types } from '@typegoose/typegoose';
 import { UserEntity } from './user.entity.js';
 import CreateUserDto from './dto/create-user.dto.js';
 import { UserServiceInterface } from './user.interface.js';
-import { LoggerInterface } from '../../packages/logger/logger.interface';
+import { LoggerInterface } from '../../packages/logger/logger.interface.js';
 import { Component } from '../../config/config.component.js';
 import UpdateUserDto from './dto/update-user.dto.js';
 
