@@ -1,6 +1,6 @@
-import { City } from '../../../types/city.enum';
-import { Coordinates, OfferFeature, OfferType } from '../../../types/offer.type';
-import { UserId } from '../../../types/user.type';
+import { City } from '../../../types/city.enum.js';
+import { Coordinates, OfferFeature, OfferType } from '../../../types/offer.type.js';
+import { UserId } from '../../../types/user.type.js';
 
 export default class UpdateOfferDto {
   public name!: string;
