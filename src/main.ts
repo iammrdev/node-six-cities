@@ -18,6 +18,10 @@ import { OfferEntity, OfferModel } from './modules/offer/offer.entity.js';
 import { CommentServiceInterface } from './modules/comment/comment.interface.js';
 import CommentService from './modules/comment/comment.service.js';
 import { CommentEntity, CommentModel } from './modules/comment/comment.entity.js';
+import UserController from './modules/user/user.contoller.js';
+import { ControllerInterface } from './controller/controller.interface.js';
+import ExceptionFilter from './packages/errors/exception-filter.js';
+import { ExceptionFilterInterface } from './packages/errors/exception-filter.interface.js';
 
 const dependencyContainer = new DependencyContainer();
 // singleton
@@ -25,6 +29,7 @@ dependencyContainer.bind<Application>(Component.Application).to(Application).inS
 dependencyContainer.bind<LoggerInterface>(Component.LoggerInterface).to(LoggerService).inSingletonScope();
 dependencyContainer.bind<ConfigInterface>(Component.ConfigInterface).to(ConfigService).inSingletonScope();
 dependencyContainer.bind<DatabaseInterface>(Component.DatabaseInterface).to(DatabaseService).inSingletonScope();
+dependencyContainer.bind<ExceptionFilterInterface>(Component.ExceptionFilterInterface).to(ExceptionFilter).inSingletonScope();
 
 // interfaces
 dependencyContainer.bind<UserServiceInterface>(Component.UserServiceInterface).to(UserService);
@@ -35,6 +40,9 @@ dependencyContainer.bind<CommentServiceInterface>(Component.CommentServiceInterf
 dependencyContainer.bind<types.ModelType<UserEntity>>(Component.UserModel).toConstantValue(UserModel);
 dependencyContainer.bind<types.ModelType<OfferEntity>>(Component.OfferModel).toConstantValue(OfferModel);
 dependencyContainer.bind<types.ModelType<CommentEntity>>(Component.CommentModel).toConstantValue(CommentModel);
+
+// controllers
+dependencyContainer.bind<ControllerInterface>(Component.UserController).to(UserController).inSingletonScope();
 
 const application = dependencyContainer.get<Application>(Component.Application);
 

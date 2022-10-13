@@ -27,6 +27,10 @@ export default class OfferService implements OfferServiceInterface {
     return this.offerModel.findById(offerId).populate('userId').exec();
   }
 
+  public async findByOffersName(offerName: string): Promise<DocumentType<OfferEntity> | null> {
+    return this.offerModel.findOne({ name: offerName }).populate('userId').exec();
+  }
+
   public async find(count?: number): Promise<DocumentType<OfferEntity>[]> {
     return this.offerModel.aggregate([
       {

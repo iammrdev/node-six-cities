@@ -17,15 +17,11 @@ export default class CommentService implements CommentServiceInterface {
   }
 
   public async findByOfferId(offerId: string): Promise<DocumentType<CommentEntity>[]> {
-    return this.commentModel
-      .find({ offerId })
-      .populate('userId');
+    return this.commentModel.find({ offerId }).populate('userId');
   }
 
   public async deleteByOfferId(offerId: string): Promise<number | null> {
-    const result = await this.commentModel
-      .deleteMany({ offerId })
-      .exec();
+    const result = await this.commentModel.deleteMany({ offerId }).exec();
 
     return result.deletedCount;
   }
