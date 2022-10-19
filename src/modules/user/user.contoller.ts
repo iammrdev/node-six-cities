@@ -14,6 +14,7 @@ import { UserServiceInterface } from './user.interface.js';
 import { fillDTO } from '../../utils/fillDTO.js';
 import { ConfigInterface } from '../../config/config.interface.js';
 import UserResponse from './response/user.response.js';
+import { ValidateDtoMiddleware } from '../../middlewares/validate-dto.middleware.js';
 
 @injectable()
 export default class UserController extends Controller {
@@ -26,7 +27,7 @@ export default class UserController extends Controller {
 
     this.logger.info('Register routes for UserController…');
 
-    this.addRoute({ path: '/register', method: HttpMethod.Post, handler: this.register });
+    this.addRoute({ path: '/register', method: HttpMethod.Post, handler: this.register, middlewares: [new ValidateDtoMiddleware(CreateUserDto)] });
     this.addRoute({ path: '/login', method: HttpMethod.Post, handler: this.login });
   }
 
