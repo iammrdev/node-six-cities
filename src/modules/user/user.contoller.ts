@@ -28,7 +28,7 @@ export default class UserController extends Controller {
     this.logger.info('Register routes for UserController…');
 
     this.addRoute({ path: '/register', method: HttpMethod.Post, handler: this.register, middlewares: [new ValidateDtoMiddleware(CreateUserDto)] });
-    this.addRoute({ path: '/login', method: HttpMethod.Post, handler: this.login });
+    this.addRoute({ path: '/login', method: HttpMethod.Post, handler: this.login, middlewares: [new ValidateDtoMiddleware(LoginUserDto)] });
   }
 
   public async register(req: Request<Record<string, unknown>, Record<string, unknown>, CreateUserDto>, res: Response,): Promise<void> {
