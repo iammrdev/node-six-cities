@@ -5,6 +5,8 @@ import { StatusCodes } from 'http-status-codes';
 import { inject, injectable } from 'inversify';
 import { Component } from '../../config/config.component.js';
 import { Controller } from '../../controller/controller.js';
+import { ValidateDtoMiddleware } from '../../middlewares/validate-dto.middleware.js';
+import { ValidateObjectIdMiddleware } from '../../middlewares/validate-objectid.middleware.js';
 import HttpError from '../../packages/errors/http-error.js';
 import { LoggerInterface } from '../../packages/logger/logger.interface.js';
 import { HttpMethod } from '../../types/http.enum.js';
@@ -31,11 +33,16 @@ export default class OfferController extends Controller {
     super(logger);
 
     this.logger.info('Register routes for OfferController…');
-    this.addRoute({ path: '/', method: HttpMethod.Get, handler: this.index });
+    this.addRoute({ path: '/', method: HttpMethod.Get, handler: this.index, middlewares: [new ValidateDtoMiddleware(CreateOfferDto)] });
     this.addRoute({ path: '/', method: HttpMethod.Post, handler: this.create });
     this.addRoute({ path: '/:offerId', method: HttpMethod.Get, handler: this.show });
     this.addRoute({ path: '/:offerId', method: HttpMethod.Delete, handler: this.delete });
-    this.addRoute({ path: '/:offerId', method: HttpMethod.Patch, handler: this.update });
+    this.addRoute({
+      path: '/:offerId', method: HttpMethod.Patch, handler: this.update, middlewares: [
+        new ValidateObjectIdMiddleware('offerId'),
+        new ValidateDtoMiddleware(UpdateOfferDto)
+      ]
+    });
     this.addRoute({ path: '/:offerId/comments', method: HttpMethod.Get, handler: this.getComments });
   }
 
