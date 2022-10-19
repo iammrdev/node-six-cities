@@ -22,6 +22,8 @@ import UserController from './modules/user/user.contoller.js';
 import { ControllerInterface } from './controller/controller.interface.js';
 import ExceptionFilter from './packages/errors/exception-filter.js';
 import { ExceptionFilterInterface } from './packages/errors/exception-filter.interface.js';
+import OfferController from './modules/offer/offer.controller.js';
+import CommentController from './modules/comment/comment.controller.js';
 
 const dependencyContainer = new DependencyContainer();
 // singleton
@@ -43,6 +45,8 @@ dependencyContainer.bind<types.ModelType<CommentEntity>>(Component.CommentModel)
 
 // controllers
 dependencyContainer.bind<ControllerInterface>(Component.UserController).to(UserController).inSingletonScope();
+dependencyContainer.bind<ControllerInterface>(Component.OfferController).to(OfferController).inSingletonScope();
+dependencyContainer.bind<ControllerInterface>(Component.CommentController).to(CommentController).inSingletonScope();
 
 const application = dependencyContainer.get<Application>(Component.Application);
 
