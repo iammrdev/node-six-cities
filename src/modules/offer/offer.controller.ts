@@ -5,6 +5,7 @@ import { StatusCodes } from 'http-status-codes';
 import { inject, injectable } from 'inversify';
 import { Component } from '../../config/config.component.js';
 import { Controller } from '../../controller/controller.js';
+import { DocumentExistsMiddleware } from '../../middlewares/document-exists.middleware.js';
 import { ValidateDtoMiddleware } from '../../middlewares/validate-dto.middleware.js';
 import { ValidateObjectIdMiddleware } from '../../middlewares/validate-objectid.middleware.js';
 import HttpError from '../../packages/errors/http-error.js';
@@ -43,7 +44,12 @@ export default class OfferController extends Controller {
         new ValidateDtoMiddleware(UpdateOfferDto)
       ]
     });
-    this.addRoute({ path: '/:offerId/comments', method: HttpMethod.Get, handler: this.getComments });
+    this.addRoute({
+      path: '/:offerId/comments', method: HttpMethod.Get, handler: this.getComments, middlewares: [
+        new ValidateObjectIdMiddleware('offerId'),
+        new DocumentExistsMiddleware(this.offerService, 'Offer', 'offerId'),
+      ]
+    });
   }
 
   public async index(_req: Request, res: Response): Promise<void> {
@@ -102,11 +108,6 @@ export default class OfferController extends Controller {
 
   public async getComments(req: Request<core.ParamsDictionary | ParamsGetOffer, object, object>, res: Response): Promise<void> {
     const { params } = req;
-
-    if (!await this.offerService.exists(params.offerId)) {
-      throw new HttpError(StatusCodes.NOT_FOUND, `Offer with id ${params.offerId} not found.`, 'OfferController');
-    }
-
     const comments = await this.commentService.findByOfferId(params.offerId);
     this.ok(res, fillDTO(CommentResponse, comments));
   }
