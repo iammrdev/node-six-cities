@@ -46,7 +46,7 @@ export class OfferResponse {
   @Expose()
   public features!: OfferFeature[];
 
-  @Expose({ name: 'userId' })
+  @Expose({ name: 'user' })
   @Type(() => UserResponse)
   public user!: UserResponse;
 
