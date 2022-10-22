@@ -8,7 +8,6 @@ export default class CreateCommentDto {
   @IsMongoId({ message: 'offerId field must be a valid id' })
   public offerId!: string;
 
-  @IsMongoId({ message: 'offerId field must be a valid id' })
   public userId!: string;
 
   @IsInt({ message: 'rating must be an integer' })
