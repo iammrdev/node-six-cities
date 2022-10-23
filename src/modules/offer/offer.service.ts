@@ -32,21 +32,10 @@ export default class OfferService implements OfferServiceInterface {
   }
 
   public async find(count?: number): Promise<DocumentType<OfferEntity>[]> {
-    return this.offerModel.aggregate([
-      {
-        $lookup: {
-          from: 'users',
-          localField: 'userId',
-          foreignField: '_id',
-          as: 'user'
-        }
-      },
-      { $unwind: '$user' },
-      {
-        $unset: 'user.password'
-      },
-      { $limit: count || 60 },
-    ]).exec();
+    return this.offerModel
+      .find({}, {}, { limit: count || DEFAULT_OFFER_COUNT })
+      .populate('userId')
+      .exec();
   }
 
   public async findNew(count?: number): Promise<DocumentType<OfferEntity>[]> {

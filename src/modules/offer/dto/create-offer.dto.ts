@@ -12,14 +12,11 @@ export default class CreateOfferDto {
   @MaxLength(1024, { message: 'maximum description length must be 1024' })
   public description!: string;
 
-  @IsDateString({}, { message: 'postDate must be valid ISO date' })
+  @IsDateString({}, { message: 'date must be valid ISO date' })
   public date!: Date;
 
   @IsEnum(City, { message: 'city must be enum City' })
   public city!: City;
-
-  @MaxLength(256, { message: 'too short for field' })
-  public preview!: string;
 
   @IsArray({ message: 'field categories must be an array' })
   public photos!: string[];
