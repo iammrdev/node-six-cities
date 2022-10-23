@@ -1,7 +1,7 @@
 import 'reflect-metadata';
 import { inject, injectable } from 'inversify';
 import express, { Express } from 'express';
-
+import cors from 'cors';
 import { LoggerInterface } from '../packages/logger/logger.interface.js';
 import { ConfigInterface } from '../config/config.interface.js';
 import { Component } from '../config/config.component.js';
@@ -36,8 +36,10 @@ export default class Application {
   public initMiddleware() {
     this.server.use(express.json());
     this.server.use('/upload', express.static(this.config.get('UPLOAD_DIRECTORY')));
+    this.server.use('/static', express.static(this.config.get('STATIC_DIRECTORY_PATH')));
     const authMiddleware = new AuthMiddleware(this.config.get('JWT_SECRET'));
     this.server.use(authMiddleware.execute.bind(authMiddleware));
+    this.server.use(cors());
   }
 
   public initExceptionFilters() {
@@ -61,6 +63,6 @@ export default class Application {
     this.initRoutes();
     this.initExceptionFilters();
     this.server.listen(this.config.get('PORT'));
-    this.logger.info(`Server started on http://localhost:${this.config.get('PORT')}`);
+    this.logger.info(`Server started on http://${this.config.get('HOST')}:${this.config.get('PORT')}`);
   }
 }
