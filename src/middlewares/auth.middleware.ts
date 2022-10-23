@@ -1,8 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 import * as jose from 'jose';
-
 import { createSecretKey } from 'crypto';
-
 import { StatusCodes } from 'http-status-codes';
 import { MiddlewareInterface } from './middleware.interface';
 import HttpError from '../packages/errors/http-error.js';
