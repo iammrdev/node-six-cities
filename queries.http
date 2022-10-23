@@ -2,3 +2,140 @@
 GET http://localhost:3123/api HTTP/1.1
 
 ###
+
+## Создание нового предложения (2.1)
+POST http://localhost:5000/offers HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InRlc3RAaWFzaGNodWsucnUiLCJpZCI6IjYzNTUzNTQxYTJmMGRhZTBmNWY0ODIxNiIsImlhdCI6MTY2NjUzNDYwNCwiZXhwIjoxNjY2NzA3NDA0fQ.PJFfr1GLL1HOteB6z2o9A7qXzIjVErs240ipgYd7OPo
+
+{
+  "name": "The Luxury Heart32",
+  "description": "Fashion cozy house in the heart of Amsterdam",
+  "date": "2022-06-24T14:00:00.246Z",
+  "city": "Amsterdam",
+  "photos": ["apartment-01.jpg", "apartment-02.jpg", "apartment-03.jpg","apartment-01.jpg", "apartment-02.jpg", "apartment-03.jpg"],
+  "isPremium": true,
+  "rating": 4,
+  "type": "apartment",
+  "rooms": 2,
+  "guests": 2,
+  "price": 5000,
+  "features": ["Air conditioning"],
+  "userId": "63342ed08909c539c45f3e93",
+  "comments": 0,
+  "coordinates": ["52.370216", "4.895168"]
+}
+
+###
+
+## Редактирование предложения (2.2)
+PATCH http://localhost:5000/offers/635535eea2f0dae0f5f4821a HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InRlc3RAaWFzaGNodWsucnUiLCJpZCI6IjYzNTUzNTQxYTJmMGRhZTBmNWY0ODIxNiIsImlhdCI6MTY2NjUzNDYwNCwiZXhwIjoxNjY2NzA3NDA0fQ.PJFfr1GLL1HOteB6z2o9A7qXzIjVErs240ipgYd7OPo
+
+{
+  "name": "New The Test Studio Super"
+}
+
+###
+
+## Удаление предложения (2.3)
+DELETE  http://localhost:5000/offers/635546b98fc542f0f505a3ef HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InRlc3RAaWFzaGNodWsucnUiLCJpZCI6IjYzNTUzNTQxYTJmMGRhZTBmNWY0ODIxNiIsImlhdCI6MTY2NjUzNDYwNCwiZXhwIjoxNjY2NzA3NDA0fQ.PJFfr1GLL1HOteB6z2o9A7qXzIjVErs240ipgYd7OPo
+
+###
+
+## Получение списка предложений по аренде (2.4)
+GET http://localhost:5000/offers HTTP/1.1
+Content-Type: application/json
+
+###
+
+## Получение детальной информации о предложении (2.5)
+GET http://localhost:5000/offers/635535eea2f0dae0f5f4821a HTTP/1.1
+Content-Type: application/json
+
+###
+
+## Получение списка комментариев для предложения (2.6)
+GET http://localhost:5000/offers/635535eea2f0dae0f5f4821a/comments HTTP/1.1
+Content-Type: application/json
+
+###
+
+## Добавление комментария для предложения (2.7)
+POST http://localhost:5000/comments HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InRlc3RAaWFzaGNodWsucnUiLCJpZCI6IjYzNTUzNTQxYTJmMGRhZTBmNWY0ODIxNiIsImlhdCI6MTY2NjUzNDYwNCwiZXhwIjoxNjY2NzA3NDA0fQ.PJFfr1GLL1HOteB6z2o9A7qXzIjVErs240ipgYd7OPo
+
+{
+  "text": "Some comment",
+  "rating": 4,
+  "offerId": "635535eea2f0dae0f5f4821a",
+  "userId": "63553541a2f0dae0f5f48216"
+}
+
+###
+
+## Создание нового пользователя (2.8)
+POST http://localhost:5000/users/register HTTP/1.1
+Content-Type: application/json
+
+{
+  "name": "Vitalii",
+  "email": "test@iashchuk.ru",
+  "type": "pro",
+  "password": "123456"
+
+}
+
+###
+
+## Вход в закрытую часть приложения (2.9)
+POST http://localhost:5000/users/login HTTP/1.1
+Content-Type: application/json
+
+{
+  "email": "test@iashchuk.ru",
+  "password": "123456"
+}
+
+###
+
+## Проверка состояния пользователя (2.10)
+GET http://localhost:5000/users/login HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InRlc3RAaWFzaGNodWsucnUiLCJpZCI6IjYzNTUzNTQxYTJmMGRhZTBmNWY0ODIxNiIsImlhdCI6MTY2NjUzNDYwNCwiZXhwIjoxNjY2NzA3NDA0fQ.PJFfr1GLL1HOteB6z2o9A7qXzIjVErs240ipgYd7OPo
+
+###
+
+## Обновление аватара пользователя
+POST http://localhost:5000/users/63553541a2f0dae0f5f48216/avatar HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InRlc3RAaWFzaGNodWsucnUiLCJpZCI6IjYzNTUzNTQxYTJmMGRhZTBmNWY0ODIxNiIsImlhdCI6MTY2NjUzNDYwNCwiZXhwIjoxNjY2NzA3NDA0fQ.PJFfr1GLL1HOteB6z2o9A7qXzIjVErs240ipgYd7OPo
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="avatar"; filename="avatar-max.jpg"
+Content-Type: image/jpeg
+
+< ./markup/img/avatar-max.jpg
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
+
+###
+
+## Обновление превью предложения
+POST http://localhost:5000/offers/635535eea2f0dae0f5f4821a/preview HTTP/1.1
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InRlc3RAaWFzaGNodWsucnUiLCJpZCI6IjYzNTUzNTQxYTJmMGRhZTBmNWY0ODIxNiIsImlhdCI6MTY2NjUzNDYwNCwiZXhwIjoxNjY2NzA3NDA0fQ.PJFfr1GLL1HOteB6z2o9A7qXzIjVErs240ipgYd7OPo
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="preview"; filename="amsterdam@2x.jpg"
+Content-Type: image/jpeg
+
+< ./markup/img/amsterdam@2x.jpg
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
+
+###
+
+

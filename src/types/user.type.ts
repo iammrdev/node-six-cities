@@ -1,6 +1,9 @@
 export type UserId = string;
 
-export type UserType = 'base' | 'pro'
+export enum UserType {
+  Base = 'base',
+  Pro = 'pro'
+}
 
 export type User = {
   id?: UserId;

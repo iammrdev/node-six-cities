@@ -14,7 +14,10 @@ export class UploadFileMiddleware implements MiddlewareInterface {
     const storage = diskStorage({
       destination: this.uploadDirectory,
       filename: (_req, file, callback) => {
-        const extension = mime.getExtension(file.mimetype);
+        console.log({ m: file.mimetype });
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        const extension = mime.extension(file.mimetype);
         const filename = nanoid();
         callback(null, `${filename}.${extension}`);
       }

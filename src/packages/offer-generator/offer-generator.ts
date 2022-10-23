@@ -1,6 +1,7 @@
 import dayjs from 'dayjs';
 import { City } from '../../types/city.enum.js';
 import { Coordinates, Offer, OfferFeature, OfferType } from '../../types/offer.type.js';
+import { UserType } from '../../types/user.type.js';
 
 import { Randomizer } from '../../utils/randomizer.js';
 import { OfferGeneratorData, OfferGeneratorInterface } from './offer-generator.interface.js';
@@ -93,7 +94,7 @@ export class OfferGenerator implements OfferGeneratorInterface {
         email,
         avatar,
         name: user,
-        type: Randomizer.getRandomItem(['base', 'pro'])
+        type: Randomizer.getRandomItem([UserType.Base, UserType.Pro])
       },
       comments: Number(comments),
       coordinates: coordinates.split(';').map(Number) as Coordinates,

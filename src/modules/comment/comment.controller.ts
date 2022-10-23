@@ -14,14 +14,16 @@ import CreateCommentDto from './dto/create-comment.dto.js';
 import { LoggerInterface } from '../../packages/logger/logger.interface.js';
 import { ValidateDtoMiddleware } from '../../middlewares/validate-dto.middleware.js';
 import { PrivateRouteMiddleware } from '../../middlewares/private-route.middleware.js';
+import { ConfigInterface } from '../../config/config.interface.js';
 
 export default class CommentController extends Controller {
   constructor(
     @inject(Component.LoggerInterface) logger: LoggerInterface,
+    @inject(Component.ConfigInterface) configService: ConfigInterface,
     @inject(Component.CommentServiceInterface) private readonly commentService: CommentServiceInterface,
     @inject(Component.OfferServiceInterface) private readonly offerService: OfferServiceInterface,
   ) {
-    super(logger);
+    super(logger, configService);
 
     this.logger.info('Register routes for CommentController…');
 
