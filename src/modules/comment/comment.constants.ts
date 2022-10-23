@@ -1,0 +1,8 @@
+export const DEFAULT_COMMENTS_COUNT = 50;
+
+export const COMMENT_CONSTRAINT = {
+  TEXT_LENGTH_MIN: 5,
+  TEXT_LENGTH_MAX: 1024,
+  RATING_MIN: 1,
+  RATING_MAX: 5,
+} as const;

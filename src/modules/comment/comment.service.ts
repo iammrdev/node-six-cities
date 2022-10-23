@@ -1,6 +1,7 @@
 import { DocumentType, types } from '@typegoose/typegoose';
 import { inject, injectable } from 'inversify';
 import { Component } from '../../config/config.component.js';
+import { DEFAULT_COMMENTS_COUNT } from './comment.constants.js';
 import { CommentEntity } from './comment.entity.js';
 import { CommentServiceInterface } from './comment.interface.js';
 import CreateCommentDto from './dto/create-comment.dto.js';
@@ -17,7 +18,7 @@ export default class CommentService implements CommentServiceInterface {
   }
 
   public async findByOfferId(offerId: string): Promise<DocumentType<CommentEntity>[]> {
-    return this.commentModel.find({ offerId }).populate('userId');
+    return this.commentModel.find({ offerId }, {}, { limit: DEFAULT_COMMENTS_COUNT }).populate('userId');
   }
 
   public async deleteByOfferId(offerId: string): Promise<number | null> {

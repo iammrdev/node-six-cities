@@ -15,6 +15,8 @@ import { OfferGenerator } from '../packages/offer-generator/offer-generator.js';
 import { Offer } from '../types/offer.type.js';
 import { getErrorMessage } from '../utils/errors.js';
 import { CliCommandInterface } from './cli-command.interface.js';
+import ConfigService from '../config/config.service.js';
+import { ConfigInterface } from '../config/config.interface.js';
 
 
 export default class ImportCommand implements CliCommandInterface {
@@ -23,6 +25,7 @@ export default class ImportCommand implements CliCommandInterface {
   private offerService!: OfferServiceInterface;
   private databaseService!: DatabaseInterface;
   private logger!: LoggerInterface;
+  private config!: ConfigInterface;
   private salt!: string;
 
   constructor() {
@@ -30,6 +33,7 @@ export default class ImportCommand implements CliCommandInterface {
     this.onEnd = this.onEnd.bind(this);
 
     this.logger = new ConsoleLoggerService();
+    this.config = new ConfigService(this.logger);
     this.offerService = new OfferService(this.logger, OfferModel);
     this.userService = new UserService(this.logger, UserModel);
     this.databaseService = new DatabaseService(this.logger);
@@ -61,10 +65,15 @@ export default class ImportCommand implements CliCommandInterface {
     this.databaseService.disconnect();
   }
 
-  public async execute(filename: string, host: string, port: string, dbname: string, salt: string, login: string, password: string,): Promise<void> {
-    console.log({ login, password, host, port, dbname });
-    const uri = getURI(host, Number(port), dbname, login, password,);
-    this.salt = salt;
+  public async execute(filename: string): Promise<void> {
+    const uri = getURI(
+      this.config.get('DB_HOST'),
+      this.config.get('DB_PORT'),
+      this.config.get('DB_NAME'),
+      this.config.get('DB_USER'),
+      this.config.get('DB_PASSWORD'));
+
+    this.salt = this.config.get('SALT');
 
     await this.databaseService.connect(uri);
 

@@ -6,7 +6,7 @@ import { OfferEntity } from './offer.entity.js';
 import { Component } from '../../config/config.component.js';
 import { LoggerInterface } from '../../packages/logger/logger.interface.js';
 import UpdateOfferDto from './dto/update-offer.dto.js';
-import { DEFAULT_OFFER_COUNT } from './offer.constants.js';
+import { DEFAULT_OFFER_COUNT, DEFAULT_OFFER_PREVIEW_NAME } from './offer.constants.js';
 import { SortType } from '../../types/common.type.js';
 
 @injectable()
@@ -17,7 +17,7 @@ export default class OfferService implements OfferServiceInterface {
   ) { }
 
   public async create(dto: CreateOfferDto): Promise<DocumentType<OfferEntity>> {
-    const result = await this.offerModel.create(dto);
+    const result = await this.offerModel.create({ ...dto, preview: DEFAULT_OFFER_PREVIEW_NAME });
     this.logger.info(`New offer created: ${dto.name}`);
 
     return result;

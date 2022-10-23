@@ -7,7 +7,15 @@ export enum OfferType {
   Room = 'room',
   Hotel = 'hotel',
 }
-export type OfferFeature = 'Breakfast' | 'Air conditioning' | 'Laptop friendly workspace' | 'Baby seat' | 'Washer' | 'Towels' | 'Fridge';
+export enum OfferFeature {
+  Breakfast = 'Breakfast',
+  AirConditioning = 'Air conditioning',
+  Laptop = 'Laptop friendly workspace',
+  BabySeat = 'Baby seat',
+  Washer = 'Washer',
+  Towels = 'Towels',
+  Fridge = 'Fridge'
+}
 
 export type Coordinates = [number, number];
 
