@@ -7,8 +7,24 @@ import {
   OfferType,
 } from '../../types/offer.type.js';
 import { UserEntity } from '../user/user.entity.js';
+import { OFFER_CONSTRAINT } from './offer.constants.js';
 
 const { prop, modelOptions } = typegoose;
+
+const {
+  NAME_LENGTH_MIN,
+  NAME_LENGTH_MAX,
+  DESCRIPTION_LENGTH_MIN,
+  DESCRIPTION_LENGTH_MAX,
+  ROOMS_COUNT_MIN,
+  ROOMS_COUNT_MAX,
+  RATING_MIN,
+  RATING_MAX,
+  GUESTS_COUNT_MIN,
+  GUESTS_COUNT_MAX,
+  PRICE_MIN,
+  PRICE_MAX,
+} = OFFER_CONSTRAINT;
 
 export interface OfferEntity extends defaultClasses.Base { }
 
@@ -21,10 +37,10 @@ export interface OfferEntity extends defaultClasses.Base { }
   }
 })
 export class OfferEntity extends defaultClasses.TimeStamps {
-  @prop({ required: true, trim: true, minlength: 10, maxlength: 100 })
+  @prop({ required: true, trim: true, minlength: NAME_LENGTH_MIN, maxlength: NAME_LENGTH_MAX })
   public name!: string;
 
-  @prop({ required: true, trim: true, minlength: 20, maxlength: 1024 })
+  @prop({ required: true, trim: true, minlength: DESCRIPTION_LENGTH_MIN, maxlength: DESCRIPTION_LENGTH_MAX })
   public description!: string;
 
   @prop({ required: true, type: Date })
@@ -42,19 +58,19 @@ export class OfferEntity extends defaultClasses.TimeStamps {
   @prop({ required: true })
   public isPremium!: boolean;
 
-  @prop({ required: true, min: 1, max: 5 })
+  @prop({ required: true, min: RATING_MIN, max: RATING_MAX })
   public rating!: number;
 
   @prop({ required: true })
   public type!: OfferType;
 
-  @prop({ required: true, min: 1, max: 8 })
+  @prop({ required: true, min: ROOMS_COUNT_MIN, max: ROOMS_COUNT_MAX })
   public rooms!: number;
 
-  @prop({ required: true, min: 1, max: 10 })
+  @prop({ required: true, min: GUESTS_COUNT_MIN, max: GUESTS_COUNT_MAX })
   public guests!: number;
 
-  @prop({ required: true, min: 100, max: 100000 })
+  @prop({ required: true, min: PRICE_MIN, max: PRICE_MAX })
   public price!: number;
 
   @prop({ required: true })

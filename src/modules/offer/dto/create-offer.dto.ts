@@ -20,14 +20,13 @@ const {
   PRICE_MAX,
 } = OFFER_CONSTRAINT;
 
-
 export default class CreateOfferDto {
-  @MinLength(NAME_LENGTH_MIN, { message: 'minimum title length must be 10' })
-  @MaxLength(NAME_LENGTH_MAX, { message: 'maximum title length must be 100' })
+  @MinLength(NAME_LENGTH_MIN, { message: `minimum title length must be ${NAME_LENGTH_MIN}` })
+  @MaxLength(NAME_LENGTH_MAX, { message: `maximum title length must be ${NAME_LENGTH_MAX}` })
   public name!: string;
 
-  @MinLength(DESCRIPTION_LENGTH_MIN, { message: 'minimum description length must be 20' })
-  @MaxLength(DESCRIPTION_LENGTH_MAX, { message: 'maximum description length must be 1024' })
+  @MinLength(DESCRIPTION_LENGTH_MIN, { message: `minimum description length must be ${DESCRIPTION_LENGTH_MIN}` })
+  @MaxLength(DESCRIPTION_LENGTH_MAX, { message: `maximum description length must be ${DESCRIPTION_LENGTH_MAX}` })
   public description!: string;
 
   @IsDateString({}, { message: 'date must be valid ISO date' })
@@ -38,8 +37,8 @@ export default class CreateOfferDto {
 
 
   @IsArray({ message: 'field categories must be an array' })
-  @ArrayMinSize(PHOTOS_COUNT, { message: 'photos length must be 6' })
-  @ArrayMaxSize(PHOTOS_COUNT, { message: 'photos length must be 6' })
+  @ArrayMinSize(PHOTOS_COUNT, { message: `photos length must be ${PHOTOS_COUNT}` })
+  @ArrayMaxSize(PHOTOS_COUNT, { message: `photos length must be ${PHOTOS_COUNT}` })
   @Matches(/[\w/-]+.(jpg|png)/, { each: true, message: 'photo must be jpg or png' })
   public photos!: string[];
 
@@ -47,26 +46,26 @@ export default class CreateOfferDto {
   public isPremium!: boolean;
 
   @IsInt({ message: 'rating must be an integer' })
-  @Min(RATING_MIN)
-  @Max(RATING_MAX)
+  @Min(RATING_MIN, { message: `min rating value be ${RATING_MIN}` })
+  @Max(RATING_MAX, { message: `max rating value be ${RATING_MAX}` })
   public rating!: number;
 
   @IsEnum(OfferType, { message: 'type must be enum OfferType' })
   public type!: OfferType;
 
   @IsInt({ message: 'rooms must be an integer' })
-  @Min(ROOMS_COUNT_MIN, { message: 'minimum rooms must be 1' })
-  @Max(ROOMS_COUNT_MAX, { message: 'maximum rooms must be 8' })
+  @Min(ROOMS_COUNT_MIN, { message: `minimum rooms must be ${ROOMS_COUNT_MIN}` })
+  @Max(ROOMS_COUNT_MAX, { message: `maximum rooms must be ${ROOMS_COUNT_MAX}` })
   public rooms!: number;
 
   @IsInt({ message: 'guests must be an integer' })
-  @Min(GUESTS_COUNT_MIN, { message: 'minimum guests must be 1' })
-  @Max(GUESTS_COUNT_MAX, { message: 'maximum guests must be 10' })
+  @Min(GUESTS_COUNT_MIN, { message: `minimum guests must be ${GUESTS_COUNT_MIN}` })
+  @Max(GUESTS_COUNT_MAX, { message: `maximum guests must be ${GUESTS_COUNT_MAX}` })
   public guests!: number;
 
   @IsInt({ message: 'price must be an integer' })
-  @Min(PRICE_MIN, { message: 'minimum price is 100' })
-  @Max(PRICE_MAX, { message: 'maximum price is 100000' })
+  @Min(PRICE_MIN, { message: `minimum price is ${PRICE_MIN}` })
+  @Max(PRICE_MAX, { message: `maximum price is ${PRICE_MAX}` })
   public price!: number;
 
   @IsArray({ message: 'features must be an array' })
