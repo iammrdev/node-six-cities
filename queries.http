@@ -1,12 +1,17 @@
+@baseUrl =  http://localhost:5000
+@token = Bearer eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InRlc3RAaWFzaGNodWsucnUiLCJpZCI6IjYzNTUzNTQxYTJmMGRhZTBmNWY0ODIxNiIsImlhdCI6MTY2NjgyNDA5NywiZXhwIjoxNjY2OTk2ODk3fQ.HM_AFX4Ge6EFww1I5Mmn48gP1mgyGc5u9tizvZbPUz8
+@offerId = 635535eea2f0dae0f5f4821a
+@offerIdForDelete = 635546b98fc542f0f505a3ef
+
 # Тестовые данные
 GET http://localhost:3123/api HTTP/1.1
 
 ###
 
 ## Создание нового предложения (2.1)
-POST http://localhost:5000/offers HTTP/1.1
+POST {{baseUrl}}/offers HTTP/1.1
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InRlc3RAaWFzaGNodWsucnUiLCJpZCI6IjYzNTUzNTQxYTJmMGRhZTBmNWY0ODIxNiIsImlhdCI6MTY2NjUzNDYwNCwiZXhwIjoxNjY2NzA3NDA0fQ.PJFfr1GLL1HOteB6z2o9A7qXzIjVErs240ipgYd7OPo
+Authorization: {{token}}
 
 {
   "name": "The Luxury Heart32",
@@ -29,9 +34,9 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InRlc3RAaWFzaGNodWsucnUiL
 ###
 
 ## Редактирование предложения (2.2)
-PATCH http://localhost:5000/offers/635535eea2f0dae0f5f4821a HTTP/1.1
+PATCH {{baseUrl}}/offers/{{offerId}} HTTP/1.1
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InRlc3RAaWFzaGNodWsucnUiLCJpZCI6IjYzNTUzNTQxYTJmMGRhZTBmNWY0ODIxNiIsImlhdCI6MTY2NjUzNDYwNCwiZXhwIjoxNjY2NzA3NDA0fQ.PJFfr1GLL1HOteB6z2o9A7qXzIjVErs240ipgYd7OPo
+Authorization: {{token}}
 
 {
   "name": "New The Test Studio Super"
@@ -40,34 +45,34 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InRlc3RAaWFzaGNodWsucnUiL
 ###
 
 ## Удаление предложения (2.3)
-DELETE  http://localhost:5000/offers/635546b98fc542f0f505a3ef HTTP/1.1
+DELETE  {{baseUrl}}/offers/{{offerIdForDelete}} HTTP/1.1
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InRlc3RAaWFzaGNodWsucnUiLCJpZCI6IjYzNTUzNTQxYTJmMGRhZTBmNWY0ODIxNiIsImlhdCI6MTY2NjUzNDYwNCwiZXhwIjoxNjY2NzA3NDA0fQ.PJFfr1GLL1HOteB6z2o9A7qXzIjVErs240ipgYd7OPo
+Authorization: {{token}}
 
 ###
 
 ## Получение списка предложений по аренде (2.4)
-GET http://localhost:5000/offers HTTP/1.1
+GET {{baseUrl}}/offers HTTP/1.1
 Content-Type: application/json
 
 ###
 
 ## Получение детальной информации о предложении (2.5)
-GET http://localhost:5000/offers/635535eea2f0dae0f5f4821a HTTP/1.1
+GET {{baseUrl}}/offers/{{offerId}} HTTP/1.1
 Content-Type: application/json
 
 ###
 
 ## Получение списка комментариев для предложения (2.6)
-GET http://localhost:5000/offers/635535eea2f0dae0f5f4821a/comments HTTP/1.1
+GET {{baseUrl}}/offers/{{offerId}}/comments HTTP/1.1
 Content-Type: application/json
 
 ###
 
 ## Добавление комментария для предложения (2.7)
-POST http://localhost:5000/comments HTTP/1.1
+POST {{baseUrl}}/comments HTTP/1.1
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InRlc3RAaWFzaGNodWsucnUiLCJpZCI6IjYzNTUzNTQxYTJmMGRhZTBmNWY0ODIxNiIsImlhdCI6MTY2NjUzNDYwNCwiZXhwIjoxNjY2NzA3NDA0fQ.PJFfr1GLL1HOteB6z2o9A7qXzIjVErs240ipgYd7OPo
+Authorization: {{token}}
 
 {
   "text": "Some comment",
@@ -79,7 +84,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InRlc3RAaWFzaGNodWsucnUiL
 ###
 
 ## Создание нового пользователя (2.8)
-POST http://localhost:5000/users/register HTTP/1.1
+POST {{baseUrl}}/users/register HTTP/1.1
 Content-Type: application/json
 
 {
@@ -93,7 +98,7 @@ Content-Type: application/json
 ###
 
 ## Вход в закрытую часть приложения (2.9)
-POST http://localhost:5000/users/login HTTP/1.1
+POST {{baseUrl}}/users/login HTTP/1.1
 Content-Type: application/json
 
 {
@@ -104,15 +109,15 @@ Content-Type: application/json
 ###
 
 ## Проверка состояния пользователя (2.10)
-GET http://localhost:5000/users/login HTTP/1.1
+GET {{baseUrl}}/users/login HTTP/1.1
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InRlc3RAaWFzaGNodWsucnUiLCJpZCI6IjYzNTUzNTQxYTJmMGRhZTBmNWY0ODIxNiIsImlhdCI6MTY2NjUzNDYwNCwiZXhwIjoxNjY2NzA3NDA0fQ.PJFfr1GLL1HOteB6z2o9A7qXzIjVErs240ipgYd7OPo
+Authorization: {{token}}
 
 ###
 
 ## Обновление аватара пользователя
-POST http://localhost:5000/users/63553541a2f0dae0f5f48216/avatar HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InRlc3RAaWFzaGNodWsucnUiLCJpZCI6IjYzNTUzNTQxYTJmMGRhZTBmNWY0ODIxNiIsImlhdCI6MTY2NjUzNDYwNCwiZXhwIjoxNjY2NzA3NDA0fQ.PJFfr1GLL1HOteB6z2o9A7qXzIjVErs240ipgYd7OPo
+POST {{baseUrl}}/users/63553541a2f0dae0f5f48216/avatar HTTP/1.1
+Authorization: {{token}}
 Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
 
 ------WebKitFormBoundary7MA4YWxkTrZu0gW
@@ -125,9 +130,9 @@ Content-Type: image/jpeg
 ###
 
 ## Обновление превью предложения
-POST http://localhost:5000/offers/635535eea2f0dae0f5f4821a/preview HTTP/1.1
+POST {{baseUrl}}/offers/{{offerId}}/preview HTTP/1.1
 Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InRlc3RAaWFzaGNodWsucnUiLCJpZCI6IjYzNTUzNTQxYTJmMGRhZTBmNWY0ODIxNiIsImlhdCI6MTY2NjUzNDYwNCwiZXhwIjoxNjY2NzA3NDA0fQ.PJFfr1GLL1HOteB6z2o9A7qXzIjVErs240ipgYd7OPo
+Authorization: {{token}}
 
 ------WebKitFormBoundary7MA4YWxkTrZu0gW
 Content-Disposition: form-data; name="preview"; filename="amsterdam@2x.jpg"
