@@ -1,5 +1,5 @@
 import { IsInt, IsMongoId, IsString, Length, Max, Min } from 'class-validator';
-import { COMMENT_CONSTRAINT } from '../comment.constants';
+import { COMMENT_CONSTRAINT } from '../comment.constants.js';
 
 const {
   TEXT_LENGTH_MIN,

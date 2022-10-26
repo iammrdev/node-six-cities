@@ -1,4 +1,4 @@
-import { ArrayMaxSize, ArrayMinSize, IsArray, IsBoolean, IsDateString, IsEnum, IsIn, IsInt, IsMongoId, Matches, Max, MaxLength, Min, MinLength } from 'class-validator';
+import { ArrayMaxSize, ArrayMinSize, IsArray, IsBoolean, IsDateString, IsEnum, IsInt, IsMongoId, Matches, Max, MaxLength, Min, MinLength } from 'class-validator';
 import { City } from '../../../types/city.enum.js';
 import { Coordinates, OfferFeature, OfferType } from '../../../types/offer.type.js';
 import { UserId } from '../../../types/user.type.js';
